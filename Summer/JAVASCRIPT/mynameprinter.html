@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Name Printer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #nameDisplay {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👋 Welcome to My Name Printer</h1>
+  <div id="nameDisplay"></div>
+
+  <script>
+    // Declare variables
+    const greeting = "Hello, my name is ";
+    let myName = "Christian";
+
+    // Use the + operator to combine strings
+    let fullMessage = greeting + myName;
+
+    // Show it in an alert box
+    alert(fullMessage);
+
+    // Also display it on the page
+    document.getElementById("nameDisplay").textContent = fullMessage;
+  </script>
+
+</body>
+</html>

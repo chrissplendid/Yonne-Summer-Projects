@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleek Dice Roller</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .dice {
+            font-size: 5rem;
+            margin: 20px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: #ff758c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff4b6e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Sleek Dice Roller</h1>
+        <div class="dice" id="dice">⚀</div>
+        <button onclick="rollDice()">Roll Dice</button>
+    </div>
+
+    <script>
+        function rollDice() {
+            const diceFaces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+            const randomIndex = Math.floor(Math.random() * 6);
+            document.getElementById('dice').textContent = diceFaces[randomIndex];
+        }
+    </script>
+</body>
+</html>

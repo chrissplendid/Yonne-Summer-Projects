@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mood Checker — Happy / Sad</title>
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --bg2: #0ea5a4;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.06);
+      --accent:#7c3aed;
+      --muted: #94a3b8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(135deg,var(--bg1),#082032);color:#e6eef8;
+    }
+
+    .card{
+      width:min(720px,94%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:16px;padding:28px;box-shadow:0 12px 40px rgba(2,6,23,0.6);backdrop-filter: blur(6px);border: 1px solid rgba(255,255,255,0.04);
+      display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:center;
+    }
+
+    .left{padding:8px}
+    h1{margin:0;font-size:22px;letter-spacing:-0.4px}
+    p.lead{margin-top:6px;color:var(--muted);font-size:14px}
+
+    /* Input area */
+    .controls{margin-top:18px;display:flex;gap:12px;align-items:center}
+    .mood-input{flex:1;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px 14px;border-radius:10px;color:inherit;font-size:15px}
+    button.btn{background:linear-gradient(90deg,var(--accent),#06b6d4);border:none;padding:11px 16px;border-radius:10px;color:white;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(12,12,15,0.5);transition:transform .12s ease}
+    button.btn:active{transform:translateY(2px)}
+
+    .quick{display:flex;gap:10px}
+    .chip{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .chip:hover{transform:translateY(-3px)}
+
+    /* Result panel */
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px}
+    .emoji{font-size:56px;margin-bottom:8px;transition:transform .25s ease}
+    .message{font-size:18px;font-weight:700;margin:0}
+    .submsg{color:var(--muted);margin-top:6px;font-size:13px;text-align:center}
+
+    /* Small screen adjustments */
+    @media (max-width:860px){
+      .card{grid-template-columns:1fr;}
+      .panel{order:-1}
+    }
+
+    /* subtle pulse for happy */
+    .happy .emoji{transform:scale(1.08)}
+    .sad .emoji{transform:rotate(-6deg) scale(.98)}
+
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <section class="left">
+      <h1 id="title">Mood Checker</h1>
+      <p class="lead">Type how you're feeling or pick a quick mood. This demo uses <code>if</code>, <code>else if</code>, and <code>===</code> comparisons to decide the response.</p>
+
+      <div class="controls">
+        <input id="moodInput" class="mood-input" placeholder="e.g. happy, sad, excited..." aria-label="Enter your mood">
+        <button id="checkBtn" class="btn">Check</button>
+      </div>
+
+      <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+        <div class="quick">
+          <div class="chip" data-mood="happy">🙂 Happy</div>
+          <div class="chip" data-mood="sad">☹️ Sad</div>
+          <div class="chip" data-mood="okay">😐 Okay</div>
+        </div>
+        <div style="color:var(--muted);font-size:13px">JS: <code>if/else</code> • strict equality <code>===</code></div>
+      </div>
+
+      <p style="margin-top:14px;color:var(--muted);font-size:13px">Tip: try typing different moods and click <strong>Check</strong> to see different reactions.</p>
+    </section>
+
+    <aside class="panel" id="result" aria-live="polite">
+      <div class="emoji" id="emoji">🤖</div>
+      <p class="message" id="message">How are you feeling today?</p>
+      <p class="submsg" id="submsg">I can respond to exact words like <strong>happy</strong> or <strong>sad</strong>.</p>
+    </aside>
+  </main>
+
+  <script>
+    const input = document.getElementById('moodInput');
+    const btn = document.getElementById('checkBtn');
+    const emoji = document.getElementById('emoji');
+    const message = document.getElementById('message');
+    const sub = document.getElementById('submsg');
+    const panel = document.getElementById('result');
+
+    // helper to set result
+    function showResult(type, emo, text, subText){
+      // clear classes
+      panel.classList.remove('happy','sad','neutral');
+      if(type === 'happy') panel.classList.add('happy');
+      if(type === 'sad') panel.classList.add('sad');
+      emoji.textContent = emo;
+      message.textContent = text;
+      sub.textContent = subText || '';
+    }
+
+    // main check function demonstrates if / else if / else and ===
+    function checkMood(value){
+      // normalize input: trim and lower-case
+      const mood = value.trim().toLowerCase();
+
+      // if the input is exactly the word "happy"
+      if(mood === 'happy'){
+        showResult('happy', '😄', 'That’s wonderful — keep smiling!', "Glad you're feeling great!");
+      } else if(mood === 'sad'){
+        // exact 'sad' check
+        showResult('sad', '😢', "I'm sorry to hear that.", 'It’s okay to take a break.');
+      } else if(mood === 'okay' || mood === 'fine' || mood === 'meh'){
+        showResult('neutral', '😐', 'A calm day — not bad!', 'Maybe try something fun later.');
+      } else if(mood === ''){
+        // empty input
+        showResult('neutral','🤖','Please enter a mood or pick a chip.','Try: happy, sad, okay');
+      } else {
+        // default fallback for anything else
+        showResult('happy','✨',`You said: "${value}"`,`Every feeling is valid.`);
+      }
+    }
+
+    // button click
+    btn.addEventListener('click', ()=>{
+      checkMood(input.value);
+    });
+
+    // Enter key support
+    input.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter') checkMood(input.value);
+    });
+
+    // quick chips
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', (e)=>{
+      const mood = e.currentTarget.getAttribute('data-mood');
+      input.value = mood;
+      checkMood(mood);
+    }));
+
+    // small Easter: when page loads, show a friendly pulse
+    window.addEventListener('load', ()=>{
+      setTimeout(()=>{
+        emoji.style.transform = 'translateY(-6px)';
+        setTimeout(()=> emoji.style.transform = '', 500);
+      }, 300);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Movies List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        input {
+            width: calc(100% - 22px);
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Favorite Movies</h1>
+        <ul id="movieList"></ul>
+        <input type="text" id="movieInput" placeholder="Enter movie name">
+        <button onclick="addMovie()">Add Movie</button>
+    </div>
+
+    <script>
+        let movies = ["Inception", "The Matrix", "Interstellar"];
+
+        function renderMovies() {
+            const list = document.getElementById('movieList');
+            list.innerHTML = "";
+            movies.forEach((movie, index) => {
+                let li = document.createElement('li');
+                li.textContent = `${index + 1}. ${movie}`;
+                list.appendChild(li);
+            });
+        }
+
+        function addMovie() {
+            const input = document.getElementById('movieInput');
+            if (input.value.trim() !== "") {
+                movies.push(input.value.trim());
+                input.value = "";
+                renderMovies();
+            }
+        }
+
+        renderMovies();
+    </script>
+</body>
+</html>

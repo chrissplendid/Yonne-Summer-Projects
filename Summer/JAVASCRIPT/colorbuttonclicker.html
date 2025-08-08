@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Button Clicker</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 50px;
+      background-color: white;
+      transition: background-color 0.5s ease;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+    }
+
+    #redBtn { background-color: crimson; }
+    #greenBtn { background-color: seagreen; }
+    #blueBtn { background-color: royalblue; }
+    #yellowBtn { background-color: goldenrod; }
+    #purpleBtn { background-color: purple; }
+  </style>
+</head>
+<body>
+
+  <h1>🎨 Click a Button to Change Color</h1>
+
+  <button id="redBtn" onclick="changeColor('crimson')">Red</button>
+  <button id="greenBtn" onclick="changeColor('seagreen')">Green</button>
+  <button id="blueBtn" onclick="changeColor('royalblue')">Blue</button>
+  <button id="yellowBtn" onclick="changeColor('goldenrod')">Yellow</button>
+  <button id="purpleBtn" onclick="changeColor('purple')">Purple</button>
+
+  <script>
+    // Function to change the background color
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+  </script>
+
+</body>
+</html>

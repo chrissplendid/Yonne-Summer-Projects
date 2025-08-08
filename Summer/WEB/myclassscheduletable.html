@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Schedule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#7c3aed;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --table-head: rgba(124,58,237,0.12);
+      --cell: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#e6eef8;background:linear-gradient(180deg,var(--bg),#071024);-webkit-font-smoothing:antialiased}
+
+    .wrap{max-width:940px;margin:48px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg,var(--card),#071328);box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .title{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#2dd4bf);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(124,58,237,0.15)}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;border:none}
+
+    .card{background:linear-gradient(180deg,var(--glass),var(--glass-2));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);overflow:auto}
+
+    table{width:100%;border-collapse:collapse;min-width:720px}
+    thead th{position:sticky;top:0;background:linear-gradient(180deg,var(--table-head),transparent);backdrop-filter: blur(4px);padding:14px 12px;text-align:left;color:#eaf2ff;font-weight:700;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    tbody td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,0.02);color:#d8e8ff;font-size:14px}
+
+    .time{width:92px;color:var(--muted);font-weight:600}
+
+    /* colored class badges */
+    .badge{display:inline-block;padding:8px 10px;border-radius:999px;font-weight:600;font-size:13px;color:white}
+    .math{background:#ef4444}
+    .eng{background:#3b82f6}
+    .cs{background:#06b6d4;color:#06283a}
+    .hist{background:#f59e0b;color:#2b1a00}
+    .pe{background:#10b981}
+
+    tr:hover td{background:rgba(255,255,255,0.01);}
+
+    /* small screens */
+    @media (max-width:780px){
+      .wrap{margin:18px}
+      table{min-width:600px}
+    }
+
+    /* responsive card below table for mobile-friendly view */
+    .mobile-list{display:none;margin-top:12px;gap:10px}
+    @media (max-width:640px){
+      table{display:none}
+      .mobile-list{display:flex;flex-direction:column}
+      .mobile-item{background:var(--cell);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+    }
+
+    footer{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="logo">CS</div>
+        <div>
+          <h1>My Class Schedule</h1>
+          <p class="lead">Weekly overview — organized, readable, and print-friendly.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn">Print</button>
+        <button class="btn primary">Add Class</button>
+      </div>
+    </header>
+
+    <div class="card">
+      <table aria-label="Class schedule">
+        <thead>
+          <tr>
+            <th class="time">Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time">08:00 - 09:00</td>
+            <td><span class="badge math">Mathematics</span></td>
+            <td></td>
+            <td><span class="badge eng">English</span></td>
+            <td></td>
+            <td><span class="badge cs">Computer Science</span></td>
+          </tr>
+
+          <tr>
+            <td class="time">09:15 - 10:15</td>
+            <td></td>
+            <td><span class="badge cs">Programming</span></td>
+            <td></td>
+            <td><span class="badge math">Calculus</span></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td class="time">10:30 - 11:30</td>
+            <td><span class="badge hist">History</span></td>
+            <td></td>
+            <td><span class="badge math">Algebra</span></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td class="time">12:00 - 13:00</td>
+            <td></td>
+            <td><span class="badge eng">Literature</span></td>
+            <td></td>
+            <td><span class="badge cs">Algorithms</span></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td class="time">14:00 - 15:00</td>
+            <td><span class="badge pe">PE</span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><span class="badge eng">Speech</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- mobile friendly alternative list -->
+      <div class="mobile-list">
+        <div class="mobile-item"><div><strong>08:00 - 09:00</strong><div style="color:var(--muted);margin-top:4px">Mon: Mathematics • Wed: English • Fri: Computer Science</div></div><div></div></div>
+        <div class="mobile-item"><div><strong>09:15 - 10:15</strong><div style="color:var(--muted);margin-top:4px">Tue: Programming • Thu: Calculus</div></div></div>
+        <div class="mobile-item"><div><strong>10:30 - 11:30</strong><div style="color:var(--muted);margin-top:4px">Mon: History • Wed: Algebra</div></div></div>
+        <div class="mobile-item"><div><strong>12:00 - 13:00</strong><div style="color:var(--muted);margin-top:4px">Tue: Literature • Thu: Algorithms</div></div></div>
+        <div class="mobile-item"><div><strong>14:00 - 15:00</strong><div style="color:var(--muted);margin-top:4px">Mon: PE • Fri: Speech</div></div></div>
+      </div>
+
+    </div>
+
+    <footer>Tip: Replace the sample classes with your own. Copy this file to <code>index.html</code> and open in a browser.</footer>
+  </div>
+</body>
+</html>
