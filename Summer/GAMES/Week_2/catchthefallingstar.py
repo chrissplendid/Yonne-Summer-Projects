@@ -22,11 +22,11 @@ player.goto(0, -250)
 
 # --- Draw the star ---
 star = turtle.Turtle()
-star.shape("circle")
+star.shape("turtle")
 star.color("yellow")
 star.penup()
 star.goto(random.randint(-280, 280), 250)
-star_speed = 3
+star_speed = 0.1
 
 # --- Draw the score display ---
 pen = turtle.Turtle()

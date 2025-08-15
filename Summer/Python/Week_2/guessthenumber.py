@@ -3,7 +3,7 @@ import random
 def choose_difficulty():
     print("Choose difficulty:")
     print("1) Easy  (1-10, 6 attempts)")
-    print("2) Normal(1-50, 7 attempts)")
+    print("2) Normal   (1-50, 7 attempts)")
     print("3) Hard  (1-100, 8 attempts)")
     choice = input("Enter 1, 2 or 3: ").strip()
     if choice == "1":

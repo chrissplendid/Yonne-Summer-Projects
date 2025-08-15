@@ -24,7 +24,7 @@ for _ in range(5):  # number of bombs
     bomb.color("red")
     bomb.penup()
     bomb.goto(random.randint(-380, 380), random.randint(100, 300))
-    bomb.speed = random.randint(1, 1)  # falling speed
+    bomb.speed = random.uniform(0.2, 0.3)  # falling speed
     bombs.append(bomb)
 
 # --- Score ---
@@ -86,7 +86,7 @@ while not game_over:
     # Speed up bombs over time
     if time.time() - start_time > 10:
         for bomb in bombs:
-            bomb.speed += 1
+            bomb.speed += 0.2
         start_time = time.time()
 
 wn.mainloop()

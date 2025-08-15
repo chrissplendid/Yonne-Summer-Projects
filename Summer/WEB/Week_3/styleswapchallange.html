@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Style Swap Challenge — Inline vs External CSS</title>
+
+  <!-- External CSS via data URL (acts like a separate styles.css file) -->
+  <link rel="stylesheet" href="data:text/css;charset=utf-8,/*%20External%20Stylesheet%20*/%0A:root%7B--bg:%230f1226;--text:%23e8ecf1;--card:%23171a35;--accent:%236ee7ff;--muted:%239aa4b2;--radius:16px;--shadow:0%2010px%2030px%20rgba(0,0,0,.35)%7D%0Ahtml,body%7Bheight:100%%7D%0Abody%7Bfont-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe%20UI',Roboto,Arial,sans-serif;background:radial-gradient(1200px%20800px%20at%2080%%20-10%%2C%20%23223%200%%2C%20%230f1226%2040%%2C%20%230b0e1d%20100%%25)%2C%20var(--bg);color:var(--text);margin:0%7D%0A.container%7Bmax-width:1040px;margin:0%20auto;padding:32px%7D%0A.header%7Bdisplay:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:12px%7D%0A.brand%7Bfont-size:clamp(22px,4vw,36px);font-weight:800;letter-spacing:.5px%7D%0A.pill%7Bpadding:8px%2012px;border-radius:999px;background:rgba(255,255,255,.06);border:1px%20solid%20rgba(255,255,255,.08)%7D%0A.grid%7Bdisplay:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px%7D%0A.card%7Bbackground:var(--card);border:1px%20solid%20rgba(255,255,255,.08);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:transform%20.25s%20ease,box-shadow%20.25s%20ease;backdrop-filter:blur(4px)%7D%0A.card:hover%7Btransform:translateY(-4px)%7D%0A.badge%7Bdisplay:inline-block;font-size:12px;padding:6px%2010px;border-radius:999px;border:1px%20solid%20rgba(255,255,255,.12);color:var(--muted);margin-bottom:10px%7D%0A.title%7Bfont-weight:800;font-size:19px;margin:6px%200%2012px%7D%0A.desc%7Bcolor:var(--muted);font-size:14px;line-height:1.5%7D%0A.accent%7Bcolor:var(--accent)%7D%0A.footer%7Bmargin-top:28px;color:var(--muted);font-size:13px;text-align:center%7D" />
+
+  <!-- Internal stylesheet: overrides and scoped styles for the middle example -->
+  <style>
+    /* Internal Stylesheet (<style>): tweaks the theme within .internal-theme */
+    .internal-theme {
+      --card: #10162f;
+      --accent: #a78bfa; /* lavender */
+      --muted: #b1bbca;
+    }
+    .internal-theme .card {
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      box-shadow: 0 12px 28px rgba(95, 73, 177, 0.35);
+    }
+    .internal-theme .badge { color: #cbbaf9; border-color: rgba(167,139,250,.35); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px }
+    .chip { font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px dashed rgba(255,255,255,.18) }
+    .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 6px }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">Style Swap Challenge</div>
+      <div class="pill">Inline vs <span class="code">&lt;style&gt;</span> vs <span class="code">&lt;link&gt;</span></div>
+    </header>
+
+    <section class="grid">
+      <!-- Card 1: External CSS only (from the <link>) -->
+      <article class="card">
+        <span class="badge">External CSS</span>
+        <h3 class="title">Global theme from <span class="code">&lt;link rel="stylesheet"&gt;</span></h3>
+        <p class="desc">This card inherits its look from the <strong>external stylesheet</strong> included via a data URL. It sets the base <span class="code">:root</span> variables (colors, radius, shadows) and the layout styles.</p>
+        <div class="chips">
+          <span class="chip">Base variables</span>
+          <span class="chip">Grid layout</span>
+          <span class="chip">Card hover</span>
+        </div>
+      </article>
+
+      <!-- Card 2: Internal <style> overrides (scoped) -->
+      <div class="internal-theme">
+        <article class="card">
+          <span class="badge">Internal &lt;style&gt;</span>
+          <h3 class="title">Scoped overrides in the page</h3>
+          <p class="desc">Inside <span class="code">.internal-theme</span>, the page’s <strong>internal stylesheet</strong> tweaks variables and borders to create a lavender vibe. This demonstrates how <em>internal CSS</em> can override the external file for selected sections.</p>
+          <div class="chips">
+            <span class="chip">Scoped theme</span>
+            <span class="chip">Custom shadow</span>
+            <span class="chip">Border accent</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Card 3: Inline styles (highest specificity) -->
+      <article class="card" style="
+        background: linear-gradient(135deg, rgba(34,211,238,.12), rgba(14,165,233,.06)) , #0d1b26;
+        border: 2px dashed #22d3ee;
+        box-shadow: 0 14px 32px rgba(34, 211, 238, 0.28);
+        color: #e6fbff;
+      ">
+        <span class="badge" style="border-color: rgba(34,211,238,.45); color:#b3f3ff">Inline Style</span>
+        <h3 class="title" style="color:#e6fbff">Inline styles win</h3>
+        <p class="desc" style="color:#c6eef7">This card uses the element’s <span class="code">style="..."</span> attribute to override both external and internal CSS. Inline styles carry the <strong>highest specificity</strong> in the cascade.</p>
+        <div class="chips">
+          <span class="chip" style="border-color:#22d3ee">Immediate override</span>
+          <span class="chip" style="border-color:#22d3ee">No selector needed</span>
+          <span class="chip" style="border-color:#22d3ee">Highest priority</span>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer">Tip: Order of power → <strong>External</strong> (link) <span class="accent">&lt;</span> <strong>Internal</strong> (&lt;style&gt;) <span class="accent">&lt;</span> <strong>Inline</strong> (style attribute).
+    </p>
+  </div>
+</body>
+</html>

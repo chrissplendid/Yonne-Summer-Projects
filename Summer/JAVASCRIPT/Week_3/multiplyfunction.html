@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiply Function</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #fbbf24;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --radius: 14px;
+      --shadow: 0 8px 28px rgba(0,0,0,0.35);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background: var(--card);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      width: 320px;
+    }
+    h1 {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      border-radius: var(--radius);
+      border: none;
+      margin: 10px;
+      width: 100px;
+      text-align: center;
+      font-size: 16px;
+    }
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Multiply Numbers</h1>
+    <input type="number" id="num1" placeholder="Number 1">
+    <input type="number" id="num2" placeholder="Number 2">
+    <br>
+    <button onclick="multiplyNumbers()">Multiply</button>
+    <div id="result">Result: --</div>
+  </div>
+
+  <script>
+    function multiplyNumbers() {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      if (isNaN(n1) || isNaN(n2)) {
+        document.getElementById('result').textContent = "Please enter valid numbers";
+        return;
+      }
+      const product = n1 * n2;
+      document.getElementById('result').textContent = `Result: ${product}`;
+    }
+  </script>
+</body>
+</html>

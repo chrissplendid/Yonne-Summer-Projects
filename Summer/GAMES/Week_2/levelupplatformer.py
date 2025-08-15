@@ -91,7 +91,7 @@ while True:
         new_y = player.ycor() + y_velocity
         y_velocity += gravity  # Gravity pulls down
         if new_y <= -250:  # Ground level
-            new_y = -250
+            new_y = -2
             is_jumping = False
             y_velocity = 0
         player.sety(new_y)
